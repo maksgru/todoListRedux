@@ -1,25 +1,40 @@
-import React, { Component } from "react";
+import React from "react";
 import "./header.css";
 
-export default class Header extends Component {
-  render() {
-    const { done, nonDone } = this.props;
-    return (
-      <div className="header">
-        <h1>My Todo List</h1>
-        <span className="done">
-          <button className="btn btn-outline-secondary btn-sm shadow-none icon-btn">
-            <i className="fa fa-eye" aria-hidden="true" />
-          </button>
+function Header(props) {
+  const { done, active, filter, todoFilter } = props;
+  const buttons =  ['all', 'active', 'done'];
+  return (
+    <div className="header">
+      <h1>My Todo List</h1>
+      <div className="info float-left">
+        <span className="number-done">
           Complited<strong className="count">{done}</strong>
         </span>
-        <span className="nondone">
-          <button className="btn btn-outline-secondary btn-sm shadow-none icon-btn">
-            <i className="fa fa-eye-slash" aria-hidden="true" />
-          </button>
-          Have to be done<strong className="count">{nonDone}</strong>
+        <span className="number-active">
+          Have to be done<strong className="count">{active}</strong>
         </span>
       </div>
-    );
-  }
+
+      <div
+        className="btn-group btn-group-sm float-right btn-filter"
+        role="group"
+        aria-label="Basic example"
+      >
+      {
+        buttons.map(name => {
+          const btnStyle = name === filter ? "btn btn-secondary" : "btn btn-outline-secondary";
+          return <button
+          type="button"
+          className={btnStyle}
+          onClick={() => todoFilter(name)}
+        >
+          {name}
+        </button>
+        })
+      }
+      </div>
+    </div>
+  );
 }
+export default Header;

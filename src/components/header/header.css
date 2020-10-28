@@ -1,16 +1,18 @@
-.done {
-  margin-right: 3rem;
+.number-done {
+  margin-right: 1rem;
 }
-.nondone {
-  margin-left: 3rem;
+.number-active {
+  margin-left: 1rem;
 }
 .count {
-    margin-left: 2rem;
+    margin-left: 1rem;
 }
 .header {
     margin-bottom: 5px;
 }
-.icon-btn {
-    border-style: none;
-    border-radius: 50%;
+.btn-filter {
+  margin-bottom: 0.3rem;
+}
+.info {
+  margin-top: 0.3rem;
 }

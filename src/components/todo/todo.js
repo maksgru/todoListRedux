@@ -1,17 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 import "./todo.css";
 
-export default class Todo extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { complited: false };
-  }
-  render() {
-    const { todo, onRemove, onComplite } = this.props;
+function Todo(props) {
+    const { todo, onRemove, onComplite } = props;
     const styles = todo.complited
       ? "list-group-item complited"
       : "list-group-item";
-      const btnStyle = todo.complited ? 'btn-success' : 'btn-outline-info';
+      const btnStyle = todo.complited ? 'btn-success' : 'btn-outline-success';
     return (
       <li className={styles}>
         {todo.todoText}
@@ -32,4 +27,4 @@ export default class Todo extends Component {
       </li>
     );
   }
-}
+export default Todo;

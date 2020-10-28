@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Header from '../header/header';
+import Header from "../header/header";
 import TodoList from "../todoList/todoList";
 import AddTodoForm from "../addTodoForm/addTodoForm";
 import "./App.css";
@@ -7,14 +7,15 @@ import "./App.css";
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       todoList: [],
-      visibilityFilter: 'all'
+      visibilityFilter: "all",
     };
     this.getId = 100;
     this.addTodo = this.addTodo.bind(this);
     this.removeTodo = this.removeTodo.bind(this);
     this.toggleComplite = this.toggleComplite.bind(this);
+    this.todoFilter = this.todoFilter.bind(this);
   }
 
   createTodo(todoText) {
@@ -45,25 +46,55 @@ export default class App extends Component {
   }
 
   toggleComplite(id) {
-    const index = this.state.todoList.findIndex(todo => todo.id === id);
+    const index = this.state.todoList.findIndex((todo) => todo.id === id);
     const isComplited = this.state.todoList[index].complited;
     let refreshedTodo = this.state.todoList[index];
     refreshedTodo.complited = !isComplited;
     this.setState(({ todoList }) => {
-      const refreshedTodoList = [...todoList.slice(0, index), refreshedTodo, ...todoList.slice(index + 1)];
+      const refreshedTodoList = [
+        ...todoList.slice(0, index),
+        refreshedTodo,
+        ...todoList.slice(index + 1),
+      ];
       return { todoList: refreshedTodoList };
-    }); 
+    });
   }
-  
+
+  todoFilter(type) {
+    this.setState({ visibilityFilter: type });
+  }
+
+  getVisibleTodos() {
+    switch (this.state.visibilityFilter) {
+      case "all":
+        return this.state.todoList;
+      case "active":
+        return this.state.todoList.filter((todo) => !todo.complited);
+      case "done":
+        return this.state.todoList.filter((todo) => todo.complited);
+      default:
+        return this.state.todoList;
+    }
+  }
+
   render() {
-    const doneTodos = this.state.todoList.filter((todo) => todo.complited).length;
-    const nonDoneTodos = this.state.todoList.length - doneTodos;
+    const doneTodos = this.state.todoList.filter((todo) => todo.complited)
+      .length;
+    const activeTodos = this.state.todoList.length - doneTodos;
+
+    const visibleTodos = this.getVisibleTodos();
+
     return (
       <div className="todo-app">
-      <Header done={doneTodos} nonDone={nonDoneTodos} />
+        <Header
+          done={doneTodos}
+          active={activeTodos}
+          todoFilter={this.todoFilter}
+          filter={this.state.visibilityFilter}
+        />
         <AddTodoForm onTodoSubmitted={this.addTodo} />
         <TodoList
-          todos={this.state.todoList}
+          todos={visibleTodos}
           removeTodo={this.removeTodo}
           toggleComplite={this.toggleComplite}
         />

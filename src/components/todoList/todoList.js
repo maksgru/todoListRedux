@@ -1,10 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import Todo from "../todo/todo";
 import "./todoList.css";
 
-export default class TodoList extends Component {
-  render() {
-    const { todos, removeTodo, toggleComplite } = this.props;
+ function TodoList(props) {
+    const { todos, removeTodo, toggleComplite } = props;
     return (
       <ul className="list-group">
         {todos.map((item) => {
@@ -20,4 +19,4 @@ export default class TodoList extends Component {
       </ul>
     );
   }
-}
+export default TodoList;
