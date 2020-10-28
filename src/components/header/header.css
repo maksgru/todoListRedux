@@ -1,0 +1,16 @@
+.done {
+  margin-right: 3rem;
+}
+.nondone {
+  margin-left: 3rem;
+}
+.count {
+    margin-left: 2rem;
+}
+.header {
+    margin-bottom: 5px;
+}
+.icon-btn {
+    border-style: none;
+    border-radius: 50%;
+}
