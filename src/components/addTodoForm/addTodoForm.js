@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { addTodo } from '../../actions/actionCreator';
 import "./addTodoForm.css";
 
-export default class AddTodoForm extends Component {
+class AddTodoForm extends Component {
   constructor(props) {
     super(props);
     this.state = { todoText: "" };
@@ -13,7 +15,10 @@ export default class AddTodoForm extends Component {
   }
   onTodoSubmit(e) {
     e.preventDefault();
-    this.props.onTodoSubmitted(this.state.todoText);
+    // this.props.onTodoSubmitted(this.state.todoText);
+    const payload = this.state.todoText;
+    this.props.addTodo(payload)
+
     this.setState({ todoText: "" });
   }
   render() {
@@ -37,3 +42,11 @@ export default class AddTodoForm extends Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addTodo: (payload) => dispatch(addTodo(payload))
+  };
+};
+
+export default connect(null ,mapDispatchToProps)(AddTodoForm);

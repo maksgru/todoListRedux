@@ -82,7 +82,7 @@ export default class App extends Component {
       .length;
     const activeTodos = this.state.todoList.length - doneTodos;
 
-    const visibleTodos = this.getVisibleTodos();
+    // const visibleTodos = this.getVisibleTodos();
 
     return (
       <div className="todo-app">
@@ -92,11 +92,11 @@ export default class App extends Component {
           todoFilter={this.todoFilter}
           filter={this.state.visibilityFilter}
         />
-        <AddTodoForm onTodoSubmitted={this.addTodo} />
+        <AddTodoForm /*onTodoSubmitted={this.addTodo}*/ />
         <TodoList
-          todos={visibleTodos}
+          /*todos={visibleTodos}
           removeTodo={this.removeTodo}
-          toggleComplite={this.toggleComplite}
+          toggleComplite={this.toggleComplite} */
         />
       </div>
     );

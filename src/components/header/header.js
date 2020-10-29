@@ -6,7 +6,7 @@ function Header(props) {
   const buttons =  ['all', 'active', 'done'];
   return (
     <div className="header">
-      <h1>My Todo List</h1>
+      <h1 className='text-secondary'>My Todo List</h1>
       <div className="info float-left">
         <span className="number-done">
           Complited<strong className="count">{done}</strong>
@@ -24,7 +24,7 @@ function Header(props) {
       {
         buttons.map(name => {
           const btnStyle = name === filter ? "btn btn-secondary" : "btn btn-outline-secondary";
-          return <button
+          return <button key={name}
           type="button"
           className={btnStyle}
           onClick={() => todoFilter(name)}
