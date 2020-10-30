@@ -2,11 +2,10 @@ import React from "react";
 import Todo from "../todo/todo";
 import { connect } from "react-redux";
 import "./todoList.css";
-import { delTodo } from "../../actions/actionCreator";
+import { delTodo, toggleTodo } from "../../actions/actionCreator";
 
 function TodoList(props) {
-  // const { todos, removeTodo, toggleComplite } = props;
-  const { todos, delTodo } = props;
+  const { todos, delTodo, toggleComplite } = props;
   return (
     <ul className="list-group">
       {todos.map((item) => {
@@ -15,7 +14,7 @@ function TodoList(props) {
             key={item.id}
             todo={item}
             onRemove={delTodo}
-            // onComplite={toggleComplite}
+            onComplite={toggleComplite}
           />
         );
       })}
@@ -23,16 +22,11 @@ function TodoList(props) {
   );
 }
 
-function mapStateToProps(store) {
-  return { todos: store };
-}
-
 function mapDispatchToProps(dispatch) {
   return {
     delTodo: (id) => dispatch(delTodo(id)),
+    toggleComplite: id => dispatch(toggleTodo(id))
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
-
-// export default TodoList;
+export default connect(null, mapDispatchToProps)(TodoList);
